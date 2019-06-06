@@ -48,7 +48,7 @@ function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.])
         HH   = lpad(hour(cdate), 2,"0")
         MM   = lpad(minute(cdate),2,"0")
        
-        file = glob("$YYYY$mm$(DD)T$HH$MM*.csv","$NETATMO_CSV_ARCHIVE/$YYYY/$mm/$DD/")
+        file = glob("$YYYY$mm$(DD)T$HH$MM*.csv","$CSV_ARCHIVE/$YYYY/$mm/$DD/")
         if !isempty(file) 
           println("Appending $file")
           append!(df,CSV.read(file[1]))

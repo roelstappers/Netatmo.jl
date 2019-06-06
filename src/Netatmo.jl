@@ -1,7 +1,7 @@
 module Netatmo
 
 import DataFrames, CSV, JSON
-using Glob, Dates
+using Glob, Dates, ProgressMeter
 
 export read
 export json2csv

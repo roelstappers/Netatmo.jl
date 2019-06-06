@@ -1,0 +1,14 @@
+name = "Netatmo"
+uuid = "cfff0a2a-884f-11e9-3fa8-b162b0da1b00"
+authors = ["Roel Stappers <roels@met.no>"]
+version = "0.1.0"
+
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
+Glob = "c27321d9-0574-5035-807b-f59d2c89b15c"
+IterativeSolvers = "42fd0dbc-a981-5370-80f2-aaf504508153"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

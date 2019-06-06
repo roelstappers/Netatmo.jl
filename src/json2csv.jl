@@ -10,7 +10,7 @@ for cdate in timerange
     outputdir = "$CSV_ARCHIVE/$YYYY/$mm/$DD/"
 
     mkpath(outputdir)
-
+    blacklist=String[]
     for filename in glob("*Z.json", lustredir) 
         
         print("reading $filename\n") 

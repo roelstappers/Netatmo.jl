@@ -6,7 +6,7 @@ using Glob, Dates
 export read
 export json2csv
 
-CSV_ARCHIVE="/home/roels/netatmo"
+CSV_ARCHIVE="/lustre/storeB/users/roels/netatmo"
 JSON_ARCHIVE="/lustre/storeB/project/metproduction/products/netatmo/"
 
 function __init__()

@@ -1,4 +1,5 @@
 """
+
    `df = read(timerange)`
 
 Returns dataframe with all Netatmo data in timerange 
@@ -9,12 +10,12 @@ Returns dataframe restricted to `latrange` `lonrange`.
 
 The returned Dataframe has columns
 
-   `df = DataFrames.DataFrame(id = String[], time_utc = Int64[], lat = Float64[], lon = Float64[], 
+   df = DataFrames.DataFrame(id = String[], time_utc = Int64[], lat = Float64[], lon = Float64[], 
                 alt=Union{Float64,Missing}[], 
                 pressure = Float64[], 
                 temperature=Union{Float64,Missing}[],
                 humidity=Union{Float64,Missing}[],
-                sum_rain_1=Union{Float64,Missing}[])`
+                sum_rain_1=Union{Float64,Missing}[])
 """
 function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.])
     
@@ -41,7 +42,8 @@ function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.])
 
     # filename are stored every 5 + 10*k minutes so we shift 5 minutes 
     # We shift end point +Minute(10) to add "late" observations  (+Minute(20)  would add little )
-    for cdate in timerange[1]+Minute(5):Minute(10):timerange[end]+Minute(5)+Minute(10)
+    @showprogress "Reading: CSV files" for cdate in timerange[1]+Minute(5):Minute(10):timerange[end]+Minute(5)+Minute(10)
+
         YYYY = year(cdate) 
         mm   = lpad(month(cdate), 2, "0") 
         DD   = lpad(day(cdate), 2, "0")

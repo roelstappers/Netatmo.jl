@@ -42,7 +42,7 @@ function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.])
 
     # filename are stored every 5 + 10*k minutes so we shift 5 minutes 
     # We shift end point +Minute(10) to add "late" observations  (+Minute(20)  would add little )
-    @showprogress "Reading: CSV files" for cdate in timerange[1]+Minute(5):Minute(10):timerange[end]+Minute(5)+Minute(10)
+    @showprogress "Reading: CSV files " for cdate in timerange[1]+Minute(5):Minute(10):timerange[end]+Minute(5)+Minute(10)
 
         YYYY = year(cdate) 
         mm   = lpad(month(cdate), 2, "0") 

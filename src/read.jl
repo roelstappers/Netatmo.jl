@@ -30,13 +30,16 @@ function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.])
     minute(timerange[end]) % 10 == 0 || error("minute(timerange[end]) % 10 != 0 ")
     second(timerange[end])      == 0 || error("second(timerange[end]) != 0 ")
     
-    
-    df = DataFrames.DataFrame(id = String[], time_utc = Int64[], lat = Float64[], lon = Float64[], 
-                              alt=Union{Float64,Missing}[], 
-                              pressure = Float64[], 
-                              temperature=Union{Float64,Missing}[],
-                              humidity=Union{Float64,Missing}[],
-                              sum_rain_1=Union{Float64,Missing}[])
+       
+    df = DataFrames.DataFrame(id          = CategoricalArray[], 
+                              time_utc    = Int64[], 
+                              lat         = Float64[], 
+                              lon         = Float64[], 
+                              alt         = Union{Float64,Missing}[], 
+                              pressure    = Float64[], 
+                              temperature = Union{Float64,Missing}[],
+                              humidity    = Union{Float64,Missing}[],
+                              sum_rain_1  = Union{Float64,Missing}[])
 
     
 

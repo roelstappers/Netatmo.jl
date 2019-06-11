@@ -1,6 +1,7 @@
 module Netatmo
 
-import DataFrames, CategoricalArrays, CSV, JSON
+import DataFrames
+using CategoricalArrays, CSV, JSON
 using Glob, Dates, ProgressMeter
 
 export read

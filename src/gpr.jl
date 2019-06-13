@@ -6,19 +6,6 @@ import Netatmo
 using CategoricalArrays
 
 
-struct SE1D{T} <: AbstractMatrix{T}
-    sigmaf2::T
-    r2::T    
-    x::Array{T}
-end 
-
-import Base.size
-Base.size(k::SE1D) = (size(k.x,1), size(k.x,1))
-
-make_se(sigmaf2,r2) = (x1,x2) -> sigmaf2*exp(abs2(x1-x2)/r2)  # use @fastmath ?
-
-*(K::SE1D,q::AbstractVector) = [q'*se.(xi, K.x) for xi in K.x]
-
 
 using GaussianProcesses
 

@@ -31,7 +31,7 @@ function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.])
     second(timerange[end])      == 0 || error("second(timerange[end]) != 0 ")
     
        
-    df = DataFrames.DataFrame(id          = CategoricalArray[], 
+    df = DataFrames.DataFrame(id          = String[], 
                               time_utc    = Int64[], 
                               lat         = Float64[], 
                               lon         = Float64[], 
@@ -78,7 +78,8 @@ function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.])
     totfilter(row) = lonfilter(row) .& latfilter(row) .& timefilter(row)
     
     filter!(totfilter,df) 
-    
+
+        
     return df
     # quick fix use mean instead of moving average
     #groupbyid = DataFrames.by(df,:id,mean=:pressure => DataFrames.mean)

@@ -14,10 +14,10 @@ struct SE{T} <: Kernel{T}
     # sigmaf2::T     
 end 
 
-make_SE(;range) = (x,y) -> SE(x,y,range=range)
+make_SE(;range::T) where T = (x::Array{T},y::Array{T}) -> SE(x,y,range=-1.0/(2*range)) 
 
-SE(x::Array{Float64}, y::Array{Float64}; range) = SE(x,y, -1.0/(2*range))
-SE(x::Array{Float64}; range) = SE(x,x; range=range)
+#SE(x::Array{Float64}, y::Array{Float64}; range) = SE(x,y, )
+# SE(x::Array{Float64}; range) = SE(x,x; range=range)
 
 Base.size(k::SE) = (size(k.x,1),size(k.y,1))
 Base.getindex(K::SE, i::Integer, j::Integer) = exp(K.alpha*abs2(K.x[i]-K.y[j])) 

@@ -10,9 +10,9 @@ K = Kernels.SE(x,range=1.)
 
 println("solving linear system")
 # @time p1 = (K+ I)\q
-@time p2, cglog = cg(K+I,q,log=true)
+@time p2, cglog = cg(K,q,log=true)
 
-println(cglog)
+# println(cglog)
 
 
 

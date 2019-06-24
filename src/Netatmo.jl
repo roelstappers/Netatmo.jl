@@ -6,6 +6,8 @@ using Glob, Dates, ProgressMeter
 
 export read
 export json2csv
+export df2df4odbimport
+export csv2csv4odbimport
 
 CSV_ARCHIVE="/lustre/storeB/users/roels/netatmo"
 JSON_ARCHIVE="/lustre/storeB/project/metproduction/products/netatmo/"
@@ -20,4 +22,5 @@ end
 
 include("read.jl")
 include("json2csv.jl")
+include("df2df4odbimport.jl")
 end

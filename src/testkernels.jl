@@ -1,5 +1,5 @@
 include("kernels.jl")
-import Kernels
+import .Kernels
 using IterativeSolvers, LinearAlgebra
 
 n = 1000
@@ -16,7 +16,7 @@ x = 5*randn(100)
 y = sin.(x) 
 sigmao=0.3
 y = y+sigmao^2*randn(100)
-xstar = collect(-10:0.1:10)
+xstar = collect(-15:0.1:15)
 K = Kernels.make_SE(range=1.)
 yhat = K(xstar,x) * ((K(x,x) + sigmao^2*I)\y)
 

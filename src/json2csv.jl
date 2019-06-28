@@ -1,6 +1,6 @@
 """
 
-    json2csv(day)
+    json2csv(day::Date)
 
 Read json data from Netatmo.JSON_ARCHIVE (lustre) and write csv data to Netatmo.CSV_ARCHIVE 
 
@@ -19,7 +19,7 @@ function json2csv(cday::Date)
     mkpath(outputdir)
     
     for jsonfile in glob("*Z.json", lustredir) 
-        csvfile =  joinpath(outputdir, splitext(basename(jsonfile))[1] * ".csv")
+        csvfile =  joinpath(outputdir, "$(splitext(basename(jsonfile))[1]).csv")
         json2csv(jsonfile,csvfile)
     end 
 end
@@ -63,6 +63,7 @@ function json2csv(jsonfile::String,csvfile::String)
         sum_rain_1  = Union{Float64,Missing}[])
     
     for val in jdict
+
         if haskey(val, "_id") 
             id  = val["_id"]
         else
@@ -98,6 +99,7 @@ function json2csv(jsonfile::String,csvfile::String)
             continue 
         end
 
+        # DefaultDict returns missing if key absent
         dd_val = DataStructures.DefaultDict(missing,val["data"])
         temperature = dd_val["Temperature"] 
         humidity    = dd_val["Humidity"]

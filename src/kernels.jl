@@ -14,7 +14,7 @@ struct SE{T} <: Kernel{T}
     # sigmaf2::T     
 end 
 
-make_SE(;range::T) where T = (x::Array{T},y::Array{T}) -> SE(x,y,-1.0/(2*range)) 
+make_SE(;range::T) where T = (x::Array{T,1},y::Array{T,1}) -> SE(x,y,-1.0/(2*range)) 
 
 #SE(x::Array{Float64}, y::Array{Float64}; range) = SE(x,y, )
 # SE(x::Array{Float64}; range) = SE(x,x; range=range)

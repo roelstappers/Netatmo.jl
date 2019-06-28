@@ -2,11 +2,7 @@ using DataFrames
 using Dates
 using Plots
 import Netatmo
-
 using CategoricalArrays
-
-
-
 using GaussianProcesses
 
 dtg = Dates.DateTime(2019,05,01,00)

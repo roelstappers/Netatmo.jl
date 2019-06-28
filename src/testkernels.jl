@@ -1,8 +1,8 @@
 include("kernels.jl")
-import .Kernels
+import Kernels
 using IterativeSolvers, LinearAlgebra
 
-n=1000
+n = 1000
 x = randn(n)
 q = randn(n)
 

@@ -3,16 +3,17 @@
 
    dfout = df2df4odbimport(df)   
 
-dfout is a dataframe in the "wide" format. 
+dfout is a dataframe in the "wide" format that can be used by odb import. 
 See https://confluence.ecmwf.int/display/ODBAPI/Importing+CSV+data
 """
 function df2df4odbimport(df)  
     
-    df[:seqno] = 0                   # add column to store seqno
+    df[:seqno] = 0                   # add integercolumn to store seqno
     groupedbyid = groupby(df,:id)
     for i in 1:length(groupedbyid,1) 
         groupedbyid[i][:seqno] = i         
     end
+    
     dfout = DataFrames.DataFrame()
 
     datetime = Dates.unix2datetime.(df[:time_utc])

@@ -62,7 +62,14 @@ function json2csv(jsonfile::String,csvfile::String)
         humidity    = Union{Float64,Missing}[],
         sum_rain_1  = Union{Float64,Missing}[])
     
-    for val in jdict
+
+    fltr(val) = haskey(val,"_id") &&
+                haskey(val["data"],"time_utc") &&
+                haskey(val,"location") &&
+                haskey(val["data"], "Pressure") && 
+                haskey(val, "altitude")
+
+    for val in filter(fltr,jdict)
 
         if haskey(val, "_id") 
             id  = val["_id"]

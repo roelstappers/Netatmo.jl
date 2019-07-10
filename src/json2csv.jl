@@ -31,7 +31,7 @@ Convert jsonfile to csvfile and return dataframe
 
 """
 function json2csv(jsonfile::String,csvfile::String)
-    print("reading $jsonfile\n") 
+    println("reading $jsonfile") 
    
     !isfile(csvfile) || error("outputfile $csvfile exists already") 
 

@@ -1,27 +1,47 @@
 
 import DataFrames
-import TimeSeries
+# import TimeSeries
 import CSV
 using Glob
 using Dates
-using DelimitedFiles
+#using DelimitedFiles
 using Plots
 import PyPlot
 import Dierckx
-using IterativeSolvers
+#using IterativeSolvers
 import Netatmo
 
-dtg = Dates.DateTime(2019,06,26,18); 
-dtgend = Dates.DateTime(2019,06,26,20); 
+dtg = Dates.DateTime(2019,07,30,12); 
+dtgend = Dates.DateTime(2019,07,30,24); 
+
+dtg = Dates.DateTime(2019,08,03,23); 
+dtgend = Dates.DateTime(2019,08,04,01); 
 
 ## archiveroot = "/media/roels/_disk2/netatmo/$YYYY/$MM/$DD"
-outdir = "/home/roels/fig4/"
+outdir = "/home/roels/20190804/"
 
-latrange = 58:0.01:64
+latrange = 58:0.01:63
 lonrange = 4:0.01:13
+lonrange = 4:0.01:10
 
 latrange = 59.5:0.01:60.5
 lonrange = 10.3:0.01:11.3
+latrange = 59.7:0.01:60.0
+lonrange = 10.6:0.01:10.9  
+
+latrange = 61.0:0.01:62.0; lonrange=5.95:0.01:6.05
+
+#---------Vassenden-----------
+if true 
+   latc=61.492980
+   lonc=6.110930
+   delta = 0.5
+   latrange = latc-delta:0.01:latc+delta; lonrange=lonc-delta:0.01:lonc+delta
+   dtg = Dates.DateTime(2019,07,30,12); 
+   dtgend = Dates.DateTime(2019,07,30,15); 
+end 
+
+
 timerange = Dates.DateTime(dtg):Dates.Minute(1):Dates.DateTime(dtgend)
 
 df = Netatmo.read(timerange, latrange=latrange, lonrange=lonrange)

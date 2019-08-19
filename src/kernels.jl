@@ -1,40 +1,28 @@
 module Kernels 
 
 import Base: size, getindex
-export SE, Interpolator,Kernel
 
-abstract type Kernel{T}  <: AbstractArray{T,2} end
 
-"""Squared exponential Kernel
-"""
-struct SE{T} <: Kernel{T}   
+struct Kernel{T}  <: AbstractArray{T,2}
     x::Array{T,1}
     y::Array{T,1}    
-    alpha::T  
-    # sigmaf2::T     
+    cov::Function    
 end 
 
-make_SE(;range::T) where T = (x::Array{T,1},y::Array{T,1}) -> SE(x,y,-1.0/(2*range)) 
 
-#SE(x::Array{Float64}, y::Array{Float64}; range) = SE(x,y, )
-# SE(x::Array{Float64}; range) = SE(x,x; range=range)
-
-Base.size(k::SE) = (size(k.x,1),size(k.y,1))
-Base.getindex(K::SE, i, j) = exp.(K.alpha*abs2.(K.x[i].-K.y[j])) 
-
-#struct Interpolator{T}
-#    Kinvval::Array{T}
-#    Kerneltype::DataType  
-#end
-
-#function Interpolator(val::Array{T},K::Kernel{T}) where T
-#    Interpolator{T}(K\val, typeof(K))
-#end 
+Base.size(K::Kernel) = (size(K.x,1),size(K.y,1))
+Base.getindex(K::Kernel, i, j) where T = K.cov(K.x[i], K.y[j]) 
 
 
-#function (itp::Interpolator{T})(x::T) where T
-#  Kstar = Kerneltype(x, itp.K.x, 2.) 
-#  return Kstar*itp.val    
-#end 
+"""
+   se(alpha=alpha) 
+
+  squared exponential covariance function 
+"""
+se(;alpha) = (x,y) -> exp(-alpha*abs2(x-y)) 
+
+
+
+
 
 end

@@ -62,7 +62,6 @@ function json2csv(jsonfile::String,csvfile::String)
         humidity    = Union{Float64,Missing}[],
         sum_rain_1  = Union{Float64,Missing}[])
     
-
     fltr(val) = haskey(val,"_id") &&
                 haskey(val["data"],"time_utc") &&
                 haskey(val,"location") &&
@@ -71,41 +70,13 @@ function json2csv(jsonfile::String,csvfile::String)
 
     for val in filter(fltr,jdict)
 
-        if haskey(val, "_id") 
-            id  = val["_id"]
-        else
-            println("Skipping: missing _id.")
-            continue 
-        end        
-        if haskey(val,"location")
-            lon = val["location"][1]   
-            lat = val["location"][2]
-        else
-            println("Skipping: missing location")
-            continue
-        end
-        if haskey(val["data"], "Pressure") 
-            pressure    = val["data"]["Pressure"]
-        else 
-            # println("Skipping: missing pressure in $id")            
-            continue
-        end
-        if haskey(val["data"],"time_utc")
-            time_utc    = val["data"]["time_utc"]            
-        else
-            println("Skipping: missing time_utc")
-            continue
-        end
+        id       = val["_id"]
+        lon      = val["location"][1]   
+        lat      = val["location"][2]
+        pressure = val["data"]["Pressure"]
+        time_utc = val["data"]["time_utc"]            
+        alt      = val["altitude"]   
         
-        # Should we continue if mising Alti
-        if haskey(val, "altitude")
-            alt    = val["altitude"]   
-        else 
-            # error("missing altitude $id") 
-            # println("missing altitude: $id")
-            continue 
-        end
-
         # DefaultDict returns missing if key absent
         dd_val = DataStructures.DefaultDict(missing,val["data"])
         temperature = dd_val["Temperature"] 

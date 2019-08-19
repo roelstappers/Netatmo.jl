@@ -4,7 +4,12 @@
 References
 * Williams, Christopher KI, and Carl Edward Rasmussen. Gaussian processes for machine learning. Vol. 2. No. 3. Cambridge, MA: MIT Press, 2006.
 
+* Bannister, Ross N. "A review of forecast error covariance statistics in atmospheric variational data assimilation. I: Characteristics and measurements of forecast error covariances." Quarterly Journal of the Royal Meteorological Society: A journal of the atmospheric sciences, applied meteorology and physical oceanography 134.637 (2008): 1951-1970.
+
+
 * Daley, Roger. Atmospheric data analysis. No. 2. Cambridge university press, 1993.
+* 
+Fisher, Mike. "Background error covariance modelling." Seminar on Recent Development in Data Assimilation for Atmosphere and Ocean. 2003.
 
 * Phillips, Norman A. "The spatial statistics of random geostrophic modes and first-guess errors." Tellus A: Dynamic Meteorology and Oceanography 38.4 (1986): 314-332.
 * Hollingsworth, A. and Lönnberg, P. 1986. The statistical structure of short  range forecast errors as determined from  radiosonde data.  Part I: The wind  field. Tellus 

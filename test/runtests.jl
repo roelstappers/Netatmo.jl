@@ -1,5 +1,4 @@
 
-# tests go here
 using Netatmo
 using CSV
 

@@ -1,0 +1,8 @@
+stqualityflag      = 1111
+numbody            = 1   
+stationinfo        = 100000 
+obstype            =  1     #  1 = SYNOP  https://apps.ecmwf.int/odbgov/obstype/
+codetype           = 14     # 14  = Automatic Land 
+vertco_reference_2 = 0.1699999976E+39     #  missing value 
+paramqcflag        = 2064
+varno              = 110  

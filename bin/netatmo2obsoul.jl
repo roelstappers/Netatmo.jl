@@ -7,7 +7,7 @@ dtg       = Dates.DateTime(2019,05,01,12)
 dtgend    = dtg+fcint 
 timerange = dtg:Hour(3):dtgend
 
-df = Netatmo.read(timerange,latrange=range(60,60.01,length=2))  # this read command should be called readnetatmo and be provided by a "PPI" module. 
+df = Netatmo.read(timerange,latrange=range(60,60.01,length=2)) 
 
 stqualityflag      = 1111
 numbody            = 1   
@@ -21,14 +21,16 @@ KNCMOCH            = "$codetype"   # see oulan_carobs.F90
 
 
 io=open("OBSOUL","w")
-println(io,"$(year(dtg))$(month(dtg))$(day(dtg)) $(hour(dtg))")    #   
+yyyymmdd = Dates.format(dtg,"yyyymmdd") 
+HH=Dates.format(dtg,"HH") 
+println(io,"$yyyymmdd $HH")    #   
 
 for val in eachrow(df)      
     id, time_utc, lat, lon, alt, pressure = val # unpack
     obsval   = 100.0*pressure   # convert hPa to Pa
-    dt       = unix2datetime(time_utc)
-    yyyymmdd = "$(year(dt))$(month(dt))$(day(dt))"          # or  Dates.format(dt,"yyyymmdd") 
-    hhmmss   = "$(hour(dt))$(minute(dt))$(second(dt))"    
+    dt       = unix2datetime(time_utc)    
+    yyyymmdd = Dates.format(dt,"yyyymmdd") 
+    hhmmss   = Dates.format(dt,"HHMMSS")      
     statid   = "'$(SubString(id,10,17))'" # 10:17 is a random choice
     header   = Any[obstype KNCMOCH lat lon statid yyyymmdd hhmmss alt numbody stqualityflag stationinfo]
     body     = Any[varno obsval vertco_reference_2  alt  paramqcflag]

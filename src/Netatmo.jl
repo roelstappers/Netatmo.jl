@@ -19,7 +19,7 @@ function __init__()
   @show JSON_ARCHIVE  
 end
 
-
+include("d_str.jl")
 include("read.jl")
 include("json2csv.jl")
 include("df2df4odbimport.jl")

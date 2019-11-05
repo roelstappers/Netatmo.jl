@@ -1,2 +1,4 @@
 doc/.ipynb_checkpoints/*
 deps/build.log
+data/*
+figures/*

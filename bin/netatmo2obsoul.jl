@@ -2,41 +2,58 @@
 
 using Netatmo, Dates
 
-fcint     = Hour(3)  # should read this from TOML or HarmonieConfig module
-dtg       = Dates.DateTime(2019,05,01,12)
-dtgend    = dtg+fcint 
-timerange = dtg:Hour(3):dtgend
+trange = Dates.DateTime(2019,08,22,03):Dates.Hour(3): Dates.DateTime(2019,08,22,03) 
+for dtgmid in trange
+# dtgmid    = Dates.DateTime(2019,08,22,03)
+dtgbeg    = dtgmid - Dates.Minute(90)
+dtgend    = dtgmid + Dates.Minute(90) 
+timerange = [dtgbeg, dtgend] 
 
-df = Netatmo.read(timerange,latrange=range(60,60.01,length=2)) 
+# df = Netatmo.read(timerange,latrange=range(60,60.01,length=2)) 
+df = Netatmo.read(timerange,latrange=[50,80],lonrange=[0,50]) 
+
+dfthinned = Netatmo.thin(df)
 
 stqualityflag      = 1111
 numbody            = 1   
 stationinfo        = 100000 
-obstype            =  1     #  1 = SYNOP  https://apps.ecmwf.int/odbgov/obstype/
+obstype            = 1     #  1 = SYNOP  https://apps.ecmwf.int/odbgov/obstype/
 codetype           = 14     # 14  = Automatic Land 
 vertco_reference_2 = 0.1699999976E+39     #  missing value 
-paramqcflag        = 2064
+paramqcflag        = 2048   
 varno              = 110    # 110=surface pressure (NOTE: 107=station pressure)
 KNCMOCH            = "$codetype"   # see oulan_carobs.F90
 
 
-io=open("OBSOUL","w")
-yyyymmdd = Dates.format(dtg,"yyyymmdd") 
-HH=Dates.format(dtg,"HH") 
-println(io,"$yyyymmdd $HH")    #   
+yyyymmdd = Dates.format(dtgmid,"yyyymmdd") 
+HH=Dates.format(dtgmid,"HH") 
 
-for val in eachrow(df)      
-    id, time_utc, lat, lon, alt, pressure = val # unpack
+io=open("OBSOUL$yyyymmdd$HH","w")
+println(io,"$yyyymmdd $HH")    #   
+g0 = 9.81 
+
+for val in eachrow(dfthinned)      
+    # id, time_utc, lat, lon, alt, pressure = val # unpack
+    time     = val[:time] 
+    lat      = val[:lat]
+    lon      = val[:lon]
+    pressure = val[:mean_pressure]
+    alt      = val[:mean_alt]
+
     obsval   = 100.0*pressure   # convert hPa to Pa
-    dt       = unix2datetime(time_utc)    
+    dt       = time   #unix2datetime(time_utc)    
     yyyymmdd = Dates.format(dt,"yyyymmdd") 
-    hhmmss   = Dates.format(dt,"HHMMSS")      
-    statid   = "'$(SubString(id,10,17))'" # 10:17 is a random choice
-    header   = Any[obstype KNCMOCH lat lon statid yyyymmdd hhmmss alt numbody stqualityflag stationinfo]
-    body     = Any[varno obsval vertco_reference_2  alt  paramqcflag]
+    hmmss   = Dates.format(dt,"HMMSS")      
+    # statid   = "'$(SubString(id,10,17))'" # 10:17 is a random choice
+    latid    = lpad(Int(10*lat),3,"0")
+    lonid    = lpad(Int(10*lon),3,"0")
+    statid   = "'NA$latid$lonid'"
+    header   = Any[obstype KNCMOCH lat lon statid yyyymmdd hmmss alt numbody stqualityflag stationinfo]
+    body     = Any[varno g0*alt vertco_reference_2  obsval  paramqcflag]
     numentrs = length(header) + length(body) + 1
     print(io,"$numentrs ") 
     print(io,join(header, " "))
+    print(" ")
     println(io,join(body," "))    
 end 
 close(io)

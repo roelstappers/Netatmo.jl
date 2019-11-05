@@ -21,7 +21,7 @@ function __init__()
   @show JSON_ARCHIVE  
 end
 
-
+include("d_str.jl")
 include("read.jl")
 include("json2csv.jl")
 include("json2feather.jl")

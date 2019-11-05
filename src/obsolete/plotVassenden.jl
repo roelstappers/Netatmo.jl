@@ -12,8 +12,11 @@ delta = 0.05
 
 latrange = latc-delta:0.01:latc+delta; lonrange=lonc-delta:0.01:lonc+delta
 
-dtg = Dates.DateTime(2019,07,30,12); 
-dtgend = Dates.DateTime(2019,07,30,24); 
+dtg = Dates.DateTime(2019,07,30,12) 
+dtgend = Dates.DateTime(2019,07,30,24) 
+dtg    = d"2019073012" 
+dtgend = d"2019073024" 
+
 
 timerange = Dates.DateTime(dtg):Dates.Minute(1):Dates.DateTime(dtgend)
 df = Netatmo.read(timerange, latrange=latrange, lonrange=lonrange)

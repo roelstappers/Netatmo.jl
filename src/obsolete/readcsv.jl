@@ -11,11 +11,14 @@ import Dierckx
 #using IterativeSolvers
 import Netatmo
 
-dtg = Dates.DateTime(2019,07,30,12); 
-dtgend = Dates.DateTime(2019,07,30,24); 
+dtg = Dates.DateTime(2019,07,30,12)
+dtgend = Dates.DateTime(2019,07,30,24) 
 
-dtg = Dates.DateTime(2019,08,03,23); 
-dtgend = Dates.DateTime(2019,08,04,01); 
+dtg = Dates.DateTime(2019,08,03,23)
+dtgend = Dates.DateTime(2019,08,04,01)
+
+dtg    = d"2019080323"
+dtgend = d"2019080401"
 
 ## archiveroot = "/media/roels/_disk2/netatmo/$YYYY/$MM/$DD"
 outdir = "/home/roels/20190804/"

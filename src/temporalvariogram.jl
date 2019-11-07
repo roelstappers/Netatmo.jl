@@ -20,15 +20,38 @@ df = CSV.read(filename,types=[Int64, Int64, Int64,Int64,Int64,Float64])
 
 groupedbyStnr = groupby(df,:Stnr)
 station=groupedbyStnr[1]
-plot(autocov(station[:PO],1:1:24*10),label="blindern")
-plot(autocov(station[:PO][:24*30],1:1:24*10),label="M1")
-plot!(autocov(station[:PO][24*30:24*30*2],1:1:24*10),label="M2")
-plot!(autocov(station[:PO][24*30*2:24*30*3],1:1:24*10),label="M3")
+
+
+JJA(station,year) = filter(d-> (d[:Month] ∈ [6, 7,8]) .& (d[:Year] == year),station)
+DJF(station,year) = filter(d-> ((d[:Month] == 12) .& (d[:Year] == year)) .| ((d[:Month] ∈ [1,2]) .& (d[:Year] == year+1)) ,station)
+
+# plot(autocov(station[!,:PO],1:1:24*10),label="blindern")
+plot(title="Autocovariance Blindern", xlabel="lag", ylabel= "covariance" )
+plot!(autocov(JJA(station,2011)[!,:PO],1:1:24*10),label="JJA2011",color=:red, markershape=:circle, markersize=0.1)
+plot!(autocov(JJA(station,2012)[!,:PO],1:1:24*10),label="JJA2012",color=:red, markershape=:star4, markersize=0.1)
+plot!(autocov(JJA(station,2013)[!,:PO],1:1:24*10),label="JJA2013",color=:red, markershape=:star6, markersize=0.1)
+plot!(autocov(DJF(station,2011)[!,:PO],1:1:24*10),label="DJF2011",color=:blue, markershape=:circle, markersize=0.1)
+plot!(autocov(DJF(station,2012)[!,:PO],1:1:24*10),label="DJF2012",color=:blue, markershape=:star4, markersize=0.1)
+plot!(autocov(DJF(station,2013)[!,:PO],1:1:24*10),label="DJF2013",color=:blue, markershape=:star6, markersize=0.1)
+
+plot(title="Autocovariance Blindern", xlabel="lag", ylabel= "covariance" ))
+plot!(autocor(JJA(station,2011)[!,:PO],1:1:24*10),label="JJA2011",color=:red, linestyle=:dot )
+plot!(autocor(JJA(station,2012)[!,:PO],1:1:24*10),label="JJA2012",color=:red, linestyle=:solid )
+plot!(autocor(JJA(station,2013)[!,:PO],1:1:24*10),label="JJA2013",color=:red, linestyle=:dash )
+plot!(autocor(DJF(station,2011)[!,:PO],1:1:24*10),label="DJF2011",color=:blue, linestyle=:dot )
+plot!(autocor(DJF(station,2012)[!,:PO],1:1:24*10),label="DJF2012",color=:blue, linestyle=:solid )
+plot!(autocor(DJF(station,2013)[!,:PO],1:1:24*10),label="DJF2013",color=:blue,  linestyle=:dash )
+
+
+
+
+plot!(autocov(station[!,:PO][24*30:24*30*2],1:1:24*10),label="M2")
+plot!(autocov(station[!,:PO][24*30*2:24*30*3],1:1:24*10),label="M3")
 
 plot()
-makeplot(i) = plot!(autocov(station[:PO][24*91*i:24*91*(i+1)],1:1:24*10),label="M$i")
+makeplot(i) = plot!(autocov(station[!,:PO][24*91*i:24*91*(i+1)],1:1:24*10),label="M$i")
 
-Mak(i) = plot!(autocov(station[station[:Month] .== i ,:PO],1:1:24*10),label="M$i",linewidth=2)
+Mak(i) = plot!(autocov(station[station[!,:Month] .== i ,:PO],1:1:24*10),label="M$i",linewidth=2)
 
 Mak.(2:2:11)
 Mak(1)

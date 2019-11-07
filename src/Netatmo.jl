@@ -3,10 +3,11 @@ module Netatmo
 import DataFrames, DataStructures
 using CategoricalArrays, CSV, JSON
 using Glob, Dates, ProgressMeter, Statistics 
-import Feather
+# import Feather
 
 export read
 export json2csv
+export @d_str
 # export df2df4odbimport
 # export csv2csv4odbimport
 
@@ -24,8 +25,8 @@ end
 include("d_str.jl")
 include("read.jl")
 include("json2csv.jl")
-include("json2feather.jl")
-
+# include("json2feather.jl")
+include("thin_randomselect.jl") 
 include("df2df4odbimport.jl")
 include("thin.jl")
 end

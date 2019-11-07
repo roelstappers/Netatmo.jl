@@ -10,5 +10,5 @@ julia> d"2018010100"
 
 """
 macro d_str(v) 
-    Dates.DateTime(v,"yyyymmddHH")
+    Dates.DateTime(v,"yyyymmddHHMMSS")
 end

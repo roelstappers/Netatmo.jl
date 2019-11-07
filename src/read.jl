@@ -54,11 +54,13 @@ function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.])
         MM   = lpad(minute(cdate),2,"0")
        
         file = glob("$YYYY$mm$(DD)T$HH$MM*.csv","$CSV_ARCHIVE/$YYYY/$mm/$DD/")
+        # file = glob("$YYYY$mm$(DD)T$HH$MM*.feather","$FEATHER_ARCHIVE/$YYYY/$mm/$DD/")
         if !isempty(file) 
-          # println("Appending $file")
+          # print("Appending $file")
           append!(df,CSV.read(file[1]))
+          # append!(df,Feather.read(file[1]))
         else 
-          # println("Missing csv file for $cdate")
+          println("Missing csv file for $cdate")
         end
     end 
 

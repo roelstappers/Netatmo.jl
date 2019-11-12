@@ -84,19 +84,20 @@ function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.])
     # Several stations have identical lat lon coordinates
     # i.e. 50 stations in Oslo have the lat lon coordinates
     # We remove all stations that have exactly the same lat lon
-    ids = unique(df,[:id])
 
-
+    result = similar(df,0);
+    groups = groupby(df,[:lat, :lon])
+    for group in groups
+       if all(group[1,:id] .== group[:,:id])
+         append!(result,group)
+       end
+    end
     # Groupby :lat :lon and if the resulting group has more than 1 row
     # return empty subdataframe else return subdataframe
     # this removes approx 1200  stations
-    uniquelatlon = by(ids,[:lat, :lon], (subdataframe) ->  nrow(subdataframe) > 1 ? similar(subdataframe,0) : subdataframe )
-
-    # Filter df to only keep stations with unique lat lon 
-    filter!( row ->  row[:id] ∈ uniquelatlon[!,:id] , df)
 
 
-    return df
+    return result
     # quick fix use mean instead of moving average
     #groupbyid = DataFrames.by(df,:id,mean=:pressure => DataFrames.mean)
 

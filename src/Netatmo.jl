@@ -1,8 +1,8 @@
 module Netatmo
 
-import DataFrames, DataStructures
+using DataFrames, DataStructures
 using CategoricalArrays, CSV, JSON
-using Glob, Dates, ProgressMeter, Statistics 
+using Glob, Dates, ProgressMeter, Statistics
 # import Feather
 
 export read
@@ -11,22 +11,23 @@ export @d_str
 # export df2df4odbimport
 # export csv2csv4odbimport
 
-CSV_ARCHIVE    ="/lustre/storeB/users/roels/netatmo/csv"
-FEATHER_ARCHIVE="/lustre/storeB/users/roels/netatmo/feather"
-JSON_ARCHIVE   ="/lustre/storeB/project/metproduction/products/netatmo/"
+const CSV_ARCHIVE    ="/lustre/storeB/users/roels/netatmo/csv"
+# const CSV_ARCHIVE    ="/media/roels/_disk2/Netatmo"
+const FEATHER_ARCHIVE="/lustre/storeB/users/roels/netatmo/feather"
+const JSON_ARCHIVE   ="/lustre/storeB/project/metproduction/products/netatmo/"
 
 function __init__()
   isdir(CSV_ARCHIVE)  || error("Directory $CSV_ARCHIVE does not exist")
-  isdir(JSON_ARCHIVE) || error("Cannot access $JSON_ARCHIVE") 
+  isdir(JSON_ARCHIVE) || error("Cannot access $JSON_ARCHIVE")
   @show CSV_ARCHIVE
-  @show JSON_ARCHIVE  
+  @show JSON_ARCHIVE
 end
 
 include("d_str.jl")
 include("read.jl")
 include("json2csv.jl")
 # include("json2feather.jl")
-include("thin_randomselect.jl") 
+include("thin_randomselect.jl")
 include("df2df4odbimport.jl")
 include("thin.jl")
 end

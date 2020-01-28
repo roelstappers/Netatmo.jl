@@ -13,6 +13,7 @@ export @d_str
 
 # const CSV_ARCHIVE    ="/lustre/storeB/users/roels/netatmo/csv"
 const CSV_ARCHIVE    ="/media/roels/_disk2/Netatmo"
+# const CSV_ARCHIVE    ="/home/roels/netatmo"
 const FEATHER_ARCHIVE="/lustre/storeB/users/roels/netatmo/feather"
 const JSON_ARCHIVE   ="/lustre/storeB/project/metproduction/products/netatmo/"
 

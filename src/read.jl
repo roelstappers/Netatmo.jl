@@ -18,7 +18,7 @@ The returned Dataframe has columns
                 sum_rain_1=Union{Float64,Missing}[])
 """
 function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.], remove_duplicate_lat_lon=true)
-
+    
     length(latrange) >= 2            || error("length(latrange) < 2")
     length(lonrange) >= 2            || error("length(lonrange) < 2")
     lonrange[1] >= -180.             || error("lonrange[1] < -180.")
@@ -79,26 +79,29 @@ function read(timerange; latrange=[-90., 90.], lonrange=[-180., 180.], remove_du
 
     totfilter(row) = lonfilter(row) .& latfilter(row) .& timefilter(row)
 
-    println()
     filter!(totfilter,df)
     @info "#obs after resticting to lat lon time range: $(nrow(df))"
 
-    # Several stations have identical lat lon coordinates
-    # i.e. 50 stations in Oslo have the lat lon coordinates
-    # We remove all stations that have exactly the same lat lon
+   
 
-    if remove_duplicate_lat_lon
+    function remove_duplicates(df,names)        
         result = similar(df,0);
-        groups = groupby(df,[:lat, :lon])
+        groups = groupby(df,names)
         for group in groups
             if all(group[1,:id] .== group[:,:id])
                 append!(result,group)
             end
         end
-        @info "#obs after removing duplicate lat lon: $(nrow(result))"
-    else
-        result = df
+        @info "#obs after removing duplicate lat lon: $(nrow(result))"       
+        return result
     end
+    
+    # Several stations have identical lat lon coordinates
+    # i.e. 50 stations in Oslo have the lat lon coordinates
+    # We remove all stations that have exactly the same lat lon
+    result = remove_duplicate_lat_lon ? remove_duplicates(df,[:lat, :lon]) : df 
+    
+
     # Groupby :lat :lon and if the resulting group has more than 1 row
     # return empty subdataframe else return subdataframe
     # this removes approx 1200  stations

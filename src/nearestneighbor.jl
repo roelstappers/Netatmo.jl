@@ -3,7 +3,7 @@ import Netatmo
 
 Rearth = 6.371e6
 
-dtg = Dates.DateTime(2019,07,29,18)
+dtg = Dates.DateTime(2018,05,10,00)
 period = Dates.Hour(24)
 timerange = dtg:Minute(10):(dtg+period)
 

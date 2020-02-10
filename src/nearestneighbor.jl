@@ -1,4 +1,4 @@
-using DataFrames, Dates, Plots, NearestNeighbors ,Distances
+using DataFrames, Dates, Plots, NearestNeighbors, Distances
 import Netatmo
 
 Rearth = 6.371e6

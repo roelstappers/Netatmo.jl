@@ -8,14 +8,17 @@ using Glob, Dates, ProgressMeter, Statistics
 export read
 export json2csv
 export @d_str
-# export df2df4odbimport
-# export csv2csv4odbimport
+
+const DIR = @__DIR__
+
 
 # const CSV_ARCHIVE    ="/lustre/storeB/users/roels/netatmo/csv"
-const CSV_ARCHIVE    ="/media/roels/_disk2/Netatmo"
+const archives = JSON.parsefile("$DIR/$(gethostname()).json")
+const CSV_ARCHIVE    = archives["CSV_ARCHIVE"] # "/media/roels/_disk2/Netatmo"
 # const CSV_ARCHIVE    ="/home/roels/netatmo"
-const FEATHER_ARCHIVE="/lustre/storeB/users/roels/netatmo/feather"
-const JSON_ARCHIVE   ="/lustre/storeB/project/metproduction/products/netatmo/"
+# const FEATHER_ARCHIVE="/lustre/storeB/users/roels/netatmo/feather"
+const JSON_ARCHIVE   = archives["JSON_ARCHIVE"] # "/lustre/storeB/project/metproduction/products/netatmo/"
+const OBSOUL_ARCHIVE   = archives["OBSOUL_ARCHIVE"] # "/media/roels/_disk2/OBSOUL/"
 
 function __init__()
   isdir(CSV_ARCHIVE)  || error("Directory $CSV_ARCHIVE does not exist")
@@ -30,5 +33,6 @@ include("json2csv.jl")
 # include("json2feather.jl")
 include("thin_randomselect.jl")
 include("df2df4odbimport.jl")
+include("read_obsoul.jl")
 include("thin.jl")
 end

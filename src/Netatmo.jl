@@ -1,7 +1,7 @@
 module Netatmo
 
 using DataFrames, DataStructures
-using CategoricalArrays, CSV, JSON
+using CategoricalArrays, CSV, JSON, Proj4
 using Glob, Dates, ProgressMeter, Statistics
 # import Feather
 
@@ -32,4 +32,5 @@ include("thin_randomselect.jl")
 include("df2df4odbimport.jl")
 include("read_obsoul.jl")
 include("thin.jl")
+include("getgrid.jl")
 end

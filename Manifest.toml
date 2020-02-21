@@ -65,9 +65,9 @@ version = "2.2.0"
 
 [[Conda]]
 deps = ["JSON", "VersionParsing"]
-git-tree-sha1 = "457ed99182beb33124aa5e602596b67fc6e1c96f"
+git-tree-sha1 = "7a58bb32ce5d85f8bf7559aa7c2842f9aecf52fc"
 uuid = "8f4d0f93-b110-5947-807f-2305c1781a2d"
-version = "1.4.0"
+version = "1.4.1"
 
 [[Contour]]
 deps = ["LinearAlgebra", "StaticArrays", "Test"]
@@ -179,6 +179,11 @@ git-tree-sha1 = "15732c475062348b0165684ffe28e85ea8396afc"
 uuid = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
 version = "1.0.0"
 
+[[IterTools]]
+git-tree-sha1 = "05110a2ab1fc5f932622ffea2a003221f4782c18"
+uuid = "c8e1da08-722c-5040-9ed9-7db0dc04731e"
+version = "1.3.0"
+
 [[IterativeSolvers]]
 deps = ["LinearAlgebra", "Printf", "Random", "RecipesBase", "SparseArrays", "Test"]
 git-tree-sha1 = "5687f68018b4f14c0da54d402bb23eecaec17f37"
@@ -198,9 +203,9 @@ version = "0.21.0"
 
 [[JuliaInterpreter]]
 deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
-git-tree-sha1 = "83ac4713e3f3ead3085e31e86cebe182f409962c"
+git-tree-sha1 = "6541c738c4f454a48645678e0bbffcd8564fb2ad"
 uuid = "aa1ae85d-cabe-5617-a682-6adf51b2e16a"
-version = "0.7.9"
+version = "0.7.12"
 
 [[LaTeXStrings]]
 deps = ["Compat"]
@@ -235,9 +240,9 @@ uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
 [[LoweredCodeUtils]]
 deps = ["JuliaInterpreter"]
-git-tree-sha1 = "b416a30717e9109fffd4d9869f2f962b5dca3162"
+git-tree-sha1 = "1c41621653250b2824b6e664ac5bd805558aeff9"
 uuid = "6f1432cf-f94c-5a45-995e-cdbf5db27b0b"
-version = "0.4.2"
+version = "0.4.3"
 
 [[MacroTools]]
 deps = ["DataStructures", "Markdown", "Random"]
@@ -347,10 +352,10 @@ uuid = "92933f4c-e287-5a05-a399-4b506db050ca"
 version = "1.1.0"
 
 [[PyCall]]
-deps = ["Conda", "Dates", "Libdl", "LinearAlgebra", "MacroTools", "Pkg", "Serialization", "Statistics", "Test", "VersionParsing"]
-git-tree-sha1 = "6e5bac1b1faf3575731a6a5b76f638f2389561d3"
+deps = ["Conda", "Dates", "Libdl", "LinearAlgebra", "MacroTools", "Serialization", "VersionParsing"]
+git-tree-sha1 = "ce0780857d129208c4e5a6d722486fb40ce11bf8"
 uuid = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
-version = "1.91.2"
+version = "1.91.3"
 
 [[PyPlot]]
 deps = ["Colors", "LaTeXStrings", "PyCall", "Sockets", "Test", "VersionParsing"]
@@ -442,9 +447,9 @@ uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
 [[StatsBase]]
 deps = ["DataAPI", "DataStructures", "LinearAlgebra", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics"]
-git-tree-sha1 = "c53e809e63fe5cf5de13632090bc3520649c9950"
+git-tree-sha1 = "be5c7d45daa449d12868f4466dbf5882242cf2d9"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
-version = "0.32.0"
+version = "0.32.1"
 
 [[TableTraits]]
 deps = ["IteratorInterfaceExtensions"]

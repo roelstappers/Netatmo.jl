@@ -32,5 +32,6 @@ include("thin_randomselect.jl")
 include("df2df4odbimport.jl")
 include("read_obsoul.jl")
 include("thin.jl")
+incluce("thin_togrid.jl")
 include("getgrid.jl")
 end

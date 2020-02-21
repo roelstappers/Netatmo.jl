@@ -11,20 +11,17 @@ export @d_str
 
 const DIR = @__DIR__
 
-
-# const CSV_ARCHIVE    ="/lustre/storeB/users/roels/netatmo/csv"
 const archives = JSON.parsefile("$DIR/$(gethostname()).json")
-const CSV_ARCHIVE    = archives["CSV_ARCHIVE"] # "/media/roels/_disk2/Netatmo"
-# const CSV_ARCHIVE    ="/home/roels/netatmo"
-# const FEATHER_ARCHIVE="/lustre/storeB/users/roels/netatmo/feather"
-const JSON_ARCHIVE   = archives["JSON_ARCHIVE"] # "/lustre/storeB/project/metproduction/products/netatmo/"
-const OBSOUL_ARCHIVE   = archives["OBSOUL_ARCHIVE"] # "/media/roels/_disk2/OBSOUL/"
+const CSV_ARCHIVE    = archives["CSV_ARCHIVE"]    # "/media/roels/_disk2/Netatmo"
+const JSON_ARCHIVE   = archives["JSON_ARCHIVE"]   # "/lustre/storeB/project/metproduction/products/netatmo/"
+const OBSOUL_ARCHIVE = archives["OBSOUL_ARCHIVE"] # "/media/roels/_disk2/OBSOUL/"
 
 function __init__()
   isdir(CSV_ARCHIVE)  || error("Directory $CSV_ARCHIVE does not exist")
   isdir(JSON_ARCHIVE) || error("Cannot access $JSON_ARCHIVE")
   @show CSV_ARCHIVE
   @show JSON_ARCHIVE
+  @show OBSOUL_ARCHIVE
 end
 
 include("d_str.jl")

@@ -1,4 +1,5 @@
-using Proj4, GMT, Makie
+using Plots
+using Netatmo
 
 # get grid with stepsize = 20km 
 lonlats  = getgrid(20000.)

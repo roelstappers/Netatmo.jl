@@ -13,7 +13,7 @@ function thin_randomselect(df)
  
     groups = DataFrames.groupby(df, [:latround, :lonround])
 
-    out_df = DataFrames.DataFrame(lat = Float64[], lon=Float64[], alt=Float64[], pressure = Float64[])
+    out_df = DataFrames.DataFrame(id = String[], lat = Float64[], lon=Float64[], alt=Float64[], pressure = Float64[])
 
     for group in groups
         # better to use some proper distance function here 
@@ -23,7 +23,7 @@ function thin_randomselect(df)
         id = group[minindex,:id]
         iddf  = group[group[:,:id] .== id,:]
 
-        push!(out_df,[iddf[1,:lat], iddf[1,:lon], iddf[1,:alt], mean(iddf[:,:pressure])])      
+        push!(out_df,iddf[1,:id],[iddf[1,:lat], iddf[1,:lon], iddf[1,:alt], mean(iddf[:,:pressure])])      
     end 
 
     return out_df

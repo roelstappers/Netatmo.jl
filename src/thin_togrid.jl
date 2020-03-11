@@ -1,22 +1,21 @@
 function thin_togrid(df)
 
-    Rearth = 6.371e6
+    Rearth = Domains.Rearth
     groups= groupby(df,:id)
     lats = [g[1,:lat] for g in groups]
     lons = [g[1,:lon] for g in groups]
 
-    kdtree = BallTree(collect([lons lats]'),Haversine(Rearth); leafsize = 10)
+    kdtree = BallTree(collect([lons lats]'),Haversine(Rearth))
 
     maxdist = 20000.
-    latlons = getgrid(maxdist)
+    domain = readdomain("METCOOP25C")
+    lonlat = getgridpoints(d,gsize=maxdist)
     out_df = DataFrames.DataFrame(id = String[], lat = Float64[], lon=Float64[], alt=Float64[], pressure = Float64[])
+
     
-    #latgrid = 50:0.2:85
-    #longrid = 0:0.2:35
-    # ind = 0 
+    
     for lat in getindex.(latlons,2)
-        # maximum allowed distance to grid box (latitude dependent)
-      #   maxdist = haversine([0, lat],[0.2, lat],Rearth)/2 
+  
         for lon in getindex.(latlons,1)
             ind, dist = knn(kdtree,[lon, lat],1)
             if dist[1] < maxdist

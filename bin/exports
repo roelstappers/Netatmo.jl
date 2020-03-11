@@ -1,8 +1,0 @@
-export ODB_API_TEST_DATA_PATH=/home/roels/.julia/dev/ODB/deps/build/odb_api_bundle-0.18.1-Source/odb-tools/src/tests/
-export ODB_ROOT=../../../../../install/odb_api_bundle-0.18.1-Source/
-export ODB_SYSPATH=/home/roels/.julia/dev/ODB/deps/install/odb_api_bundle-0.18.1-Source/include
-export ODB_BEBINPATH=/home/roels/.julia/dev/ODB/deps/install/odb_api_bundle-0.18.1-Source/bin
-export ODB_FEBINPATH=/home/roels/.julia/dev/ODB/deps/install/odb_api_bundle-0.18.1-Source/bin
-export ODB_BINPATH=/home/roels/.julia/dev/ODB/deps/install/odb_api_bundle-0.18.1-Source/bin
-
-

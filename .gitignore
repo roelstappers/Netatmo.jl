@@ -1,4 +1,4 @@
-doc/.ipynb_checkpoints/*
+doc/Notebooks/.ipynb_checkpoints/*
 deps/build.log
 data/*
 figures/*

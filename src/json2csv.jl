@@ -1,9 +1,6 @@
 """
-
     json2csv(day::Date)
-
 Read json data from Netatmo.JSON_ARCHIVE (lustre) and write csv data to Netatmo.CSV_ARCHIVE 
-
 CSV columns are 
 :id,:time_utc,round(:lat,digits=6),round(:lon,digits=6),:alt,:pressure,:temperature,:humidity,:sum_rain_1 
 """
@@ -26,9 +23,7 @@ end
 
 """
    df = json2csv(jsonfile::String,csvfile::String)
-
 Convert jsonfile to csvfile and return dataframe
-
 """
 function json2csv(jsonfile::String,csvfile::String)
     println("reading $jsonfile") 

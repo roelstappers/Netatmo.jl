@@ -50,15 +50,16 @@ for dtgmid in trange
         lon      = val[:lon]
         pressure = val[:pressure]
         alt      = val[:alt]
+        id       = val[:id]
 
         obsval   = mslp2sp_coeff(alt) * 100 * pressure   # convert hPa to Pa and convert to surface pressure
     #  dt       = time   #unix2datetime(time_utc)    
         yyyymmdd = Dates.format(dtgmid, "yyyymmdd") 
         hmmss    = Dates.format(dtgmid, "HMMSS")      # No leading zero for HH
-    # statid   = "'$(SubString(id,10,17))'" # 10:17 is a random choice
+        statid   = "'$(SubString(id,10,17))'" # 10:17 is a random choice
         latid    = lpad(Int(round(10 * lat)), 3, "0")
         lonid    = lpad(Int(round(10 * lon)), 3, "0")
-        statid   = "'NA$latid$lonid'"
+        # statid   = "'NA$latid$lonid'"
         header   = Any[obstype, KNCMOCH, lat, lon, statid, yyyymmdd, hmmss, alt, numbody, stqualityflag, stationinfo]
         body     = Any[varno, g0 * alt, vertco_reference_2,  obsval,  paramqcflag]
         numentrs = length(header) + length(body) + 1

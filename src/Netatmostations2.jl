@@ -16,15 +16,17 @@ end
 # Convenience function 
 lon(nas::NetatmoStation)  = nas.Longitude
 lat(nas::NetatmoStation)  = nas.Latitude
-lat(alt::NetatmoStation)  = alt.Altitude
+alt(nas::NetatmoStation)  = nas.Altitude
 
 # Check if 2 netatmo station are equal (uses _id)
 ==(nas1::NetatmoStation,nas2::NetatmoStation) = nas1._id == nas2._id
 
-# Coefficient to convert mslp2sp as used by Netatmo
+# Coefficient to convert mslp2sp as used by Netatmo in their sp2mslp computation
 mslp2sp_coeff(alt) = 1.0 / (Int(round(100000 / (( 288 - 0.0065 * alt) / 288)^5.255)) / 100000)
 
-sp(nas::NetatmoStation) 
+mslp2sp_coeff(nas::NetatmoStation) = mslp2sp_coeff(nas.d)
+
+
 
 
 

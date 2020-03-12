@@ -26,7 +26,7 @@ For thinning we use the [Hirlam/Domains.jl](https://github.com/Hirlam/Domains.jl
 
 Current thinning distance is 20km
 
-![](assets/scatter_metcoop25c_20km.png)
+![](docs/src/assets/scatter_metcoop25c_20km.png)
 
 
 ## References

@@ -24,7 +24,8 @@ alt(nas::NetatmoStation)  = nas.Altitude
 # Coefficient to convert mslp2sp as used by Netatmo in their sp2mslp computation
 mslp2sp_coeff(alt) = 1.0 / (Int(round(100000 / (( 288 - 0.0065 * alt) / 288)^5.255)) / 100000)
 
-mslp2sp_coeff(nas::NetatmoStation) = mslp2sp_coeff(nas.d)
+mslp2sp_coeff(nas::NetatmoStation) = mslp2sp_coeff(nas.alt)
+
 
 
 

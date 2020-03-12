@@ -1,4 +1,32 @@
-# netatmo
+# Netatmo
+
+## Obtaining the source 
+
+```bash
+git clone https://github.com/roelstappers/Netatmo.jl.git Netatmo
+```
+
+## Usage 
+To convert json files from `/lustre/storeB/project/metproduction/products/netatmo/`
+ to csv. Will only work at MET because of specifics in the JSON format. 
+
+```julia
+julia --project scr/json2csv.jl
+```
+
+To convert csv to OBSOUL
+
+```julia 
+julia --project scr/netatmo2obsoul.jl
+```
+
+## Thinning 
+
+For thinning we use the [Hirlam/Domains.jl](https://github.com/Hirlam/Domains.jl) package
+
+Current thinning distance is 20km
+
+![](assets/scatter_metcoop25c_20km.png)
 
 
 ## References

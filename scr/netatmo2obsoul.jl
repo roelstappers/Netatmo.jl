@@ -21,10 +21,13 @@ for dtgmid in trange
     timerange = [dtgbeg, dtgend] 
 
     # df = Netatmo.read(timerange,latrange=range(60,60.01,length=2)) 
+    @info "Reading: $timerange"
     df = Netatmo.read(timerange, latrange = [50,80], lonrange = [0,50]) 
 
-    dfthinned = Netatmo.thin_randomselect(df)
+    @info "Thinning to grid"
+    dfthinned = Netatmo.thin_togrid(df)
 
+    @info "Thinning finished"
     stqualityflag      = 1111
     numbody            = 1   
     stationinfo        = 100000 

@@ -1,8 +1,9 @@
 module Netatmo
 
 using DataFrames, DataStructures
-using CategoricalArrays, CSV, JSON
-using Glob, Dates, ProgressMeter, Statistics
+using CategoricalArrays, CSV, JSON, Distances
+using Glob, Dates, ProgressMeter, Statistics, NearestNeighbors
+using Domains
 # import Feather
 
 export read
@@ -24,19 +25,12 @@ function __init__()
   @show OBSOUL_ARCHIVE
 end
 
-struct NAObs{T}
-  Humidity::T
-  Pressure::T   #MSLP as calculated by Netatmo  
-    
-  Rain{T} 
-
-end 
 
 include("d_str.jl")
 include("read.jl")
 include("json2csv.jl")
 # include("json2feather.jl")
-include("thin_randomselect.jl")
+# include("thin_randomselect.jl")
 include("read_obsoul.jl")
 include("thin_togrid.jl")
 # include("getgrid.jl")

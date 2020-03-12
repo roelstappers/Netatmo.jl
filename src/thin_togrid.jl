@@ -1,31 +1,32 @@
 function thin_togrid(df)
 
     Rearth = Domains.Rearth
-    groups= groupby(df,:id)
+    groups= DataFrames.groupby(df,:id)
     lats = [g[1,:lat] for g in groups]
     lons = [g[1,:lon] for g in groups]
 
-    kdtree = BallTree(collect([lons lats]'),Haversine(Rearth))
+    @info "Create balltree"
+    kdtree = NearestNeighbors.BallTree(collect([lons lats]'),Distances.Haversine(Rearth),leafsize=10)
 
     maxdist = 20000.
-    domain = readdomain("METCOOP25C")
-    lonlat = getgridpoints(d,gsize=maxdist)
+    domain = Domains.readdomain("METCOOP25C")
+    lonlat = Domains.getgridpoints(domain,gsize=maxdist)
     out_df = DataFrames.DataFrame(id = String[], lat = Float64[], lon=Float64[], alt=Float64[], pressure = Float64[])
 
+
+    @info "Loop over lon lat "
+    ind, dist = knn(kdtree,collect([getindex.(lonlat,1) getindex.(lonlat,2)]'),1)
+
+    mask = getindex.(dist) .< maxdist/2   # only use Netatmo stations within maxdist of grid point
+    ok_indices = getindex.(ind,1)[mask]
+
     
-    
-    for lat in getindex.(latlons,2)
-  
-        for lon in getindex.(latlons,1)
-            ind, dist = knn(kdtree,[lon, lat],1)
-            if dist[1] < maxdist
-                s = groups[ind[1]]
-                push!(out_df,[s[1,:id],s[1,:lat], s[1,:lon], s[1,:alt], mean(s[:,:pressure])])      
-            end
-        end
+    for ind in ok_indices 
+        s = groups[ind]
+        push!(out_df,[s[1,:id],s[1,:lat], s[1,:lon], s[1,:alt], Statistics.mean(s[:,:pressure])])              
     end   
     @assert nrow(out_df) == nrow(unique(out_df,:id))  # make sure all id's are unique
-
+    # scatter(out_df[:,:lon],out_df[:,:lat],legend=false)
     return out_df
 end 
 

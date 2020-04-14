@@ -9,7 +9,7 @@ function thin_togrid(df)
     kdtree = NearestNeighbors.BallTree(collect([lons lats]'),Distances.Haversine(Rearth),leafsize=10)
 
     maxdist = 20000.
-    domain = Domains.readdomain("METCOOP25C")
+    domain = Domains.Domain("METCOOP25C")
     lonlat = Domains.getgridpoints(domain,gsize=maxdist)
     out_df = DataFrames.DataFrame(id = String[], lat = Float64[], lon=Float64[], alt=Float64[], pressure = Float64[])
 

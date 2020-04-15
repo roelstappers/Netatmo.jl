@@ -7,6 +7,17 @@ git clone https://github.com/roelstappers/Netatmo.jl.git Netatmo
 ```
 
 ## Usage 
+
+Create a file `Netatmo/src/config/$HOSTNAME.json` e.g. for PPI `xvis-m3a.json`
+
+```json
+{
+    "CSV_ARCHIVE": "/lustre/storeB/users/roels/Netatmo",
+    "JSON_ARCHIVE": "/lustre/storeB/project/metproduction/products/netatmo/",
+    "OBSOUL_ARCHIVE": "/lustre/storeB/users/roels/OBSOUL/"
+}
+```
+
 To convert json files from `/lustre/storeB/project/metproduction/products/netatmo/`
  to csv. Will only work at MET because of specifics in the JSON format. 
 

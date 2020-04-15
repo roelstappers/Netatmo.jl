@@ -17,7 +17,7 @@ julia --project scr/json2csv.jl
 To convert csv to OBSOUL
 
 ```julia 
-julia --project scr/netatmo2obsoul.jl
+julia --project scr/csv2obsoul.jl
 ```
 
 ## Thinning 

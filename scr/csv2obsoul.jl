@@ -11,9 +11,9 @@ using Netatmo, Dates
 # Equation provided by Celine Bensahla-Tani  
 # We use this to undo the conversion to mslp from Netatmo
 mslp2sp_coeff(alt) = 1.0 / (Int(round(100000 / (( 288 - 0.0065 * alt) / 288)^5.255)) / 100000)
+mkpath(Netatmo.OBSOUL_ARCHIVE)
 
-
-trange = Dates.DateTime(2019, 07, 09, 00):Dates.Hour(3):Dates.DateTime(2019, 09, 01, 00) 
+trange = Dates.DateTime(2019, 07, 08, 00):Dates.Hour(3):Dates.DateTime(2019, 07, 09, 00) 
 for dtgmid in trange
     # dtgmid    = Dates.DateTime(2019,08,22,03)
     dtgbeg    = dtgmid - Dates.Minute(90)
@@ -42,7 +42,7 @@ for dtgmid in trange
     yyyymmdd = Dates.format(dtgmid, "yyyymmdd") 
     HH = Dates.format(dtgmid, "HH") 
 
-    io = open("OBSOUL$yyyymmdd$HH", "w")
+    io = open("$(Netatmo.OBSOUL_ARCHIVE)/OBSOUL$yyyymmdd$HH", "w")
     println(io, "$yyyymmdd $HH")    #   
     g0 = 9.81 
 

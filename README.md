@@ -8,11 +8,11 @@ git clone https://github.com/roelstappers/Netatmo.jl.git Netatmo
 
 ## Usage 
 
-Create a file `Netatmo/src/config/$HOSTNAME.json` e.g. for PPI `xvis-m3a.json`
+edit `Netatmo/src/config/config.json` e.g. for PPI
 
 ```json
 {
-    "CSV_ARCHIVE": "/lustre/storeB/users/roels/Netatmo",
+    "CSV_ARCHIVE": "/lustre/storeB/users/<username>/Netatmo",
     "JSON_ARCHIVE": "/lustre/storeB/project/metproduction/products/netatmo/",
     "OBSOUL_ARCHIVE": "/lustre/storeB/users/roels/OBSOUL/"
 }

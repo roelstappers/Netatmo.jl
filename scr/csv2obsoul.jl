@@ -13,7 +13,7 @@ using Netatmo, Dates
 mslp2sp_coeff(alt) = 1.0 / (Int(round(100000 / (( 288 - 0.0065 * alt) / 288)^5.255)) / 100000)
 
 
-trange = Dates.DateTime(2019, 08, 01, 00):Dates.Hour(3):Dates.DateTime(2019, 09, 01, 00) 
+trange = Dates.DateTime(2019, 07, 09, 00):Dates.Hour(3):Dates.DateTime(2019, 09, 01, 00) 
 for dtgmid in trange
     # dtgmid    = Dates.DateTime(2019,08,22,03)
     dtgbeg    = dtgmid - Dates.Minute(90)
@@ -32,7 +32,7 @@ for dtgmid in trange
     numbody            = 1   
     stationinfo        = 100000 
     obstype            = 1     #  1 = SYNOP  https://apps.ecmwf.int/odbgov/obstype/
-    codetype           = 14     # 14  = Automatic Land 
+    codetype           = 199      # 199 = new codetype, 14  = Automatic Land 
     vertco_reference_2 = 0.1699999976E+39     #  missing value 
     paramqcflag        = 2048   
     varno              = 110    # 110=surface pressure (NOTE: 107=station pressure)

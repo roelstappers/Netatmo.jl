@@ -184,6 +184,12 @@ version = "0.7.0"
 [[FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
+[[FillArrays]]
+deps = ["LinearAlgebra", "Random", "SparseArrays"]
+git-tree-sha1 = "51cc2f9bc4eb9c6c0e81ec2f779d1085583cc956"
+uuid = "1a297f60-69ca-5386-bcde-b61e274b549b"
+version = "0.8.7"
+
 [[FixedPointNumbers]]
 git-tree-sha1 = "3ba9ea634d4c8b289d590403b4a06f8e227a6238"
 uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
@@ -639,6 +645,12 @@ deps = ["Dates", "DelimitedFiles", "RecipesBase", "Reexport", "Statistics", "Tab
 git-tree-sha1 = "f030f3c72300d92302777e794a3204420a5562d1"
 uuid = "9e3dc215-6440-5c97-bce1-76c03772f85e"
 version = "0.18.0"
+
+[[TotalLeastSquares]]
+deps = ["FillArrays", "LinearAlgebra", "Printf", "SparseArrays", "Statistics"]
+git-tree-sha1 = "c83445b3594d8f08436f1db4a8e405ec4413bd09"
+uuid = "028f657a-7ace-5159-a694-8cfd97933b0c"
+version = "1.5.0"
 
 [[UUIDs]]
 deps = ["Random", "SHA"]

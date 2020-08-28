@@ -1,0 +1,5 @@
+{
+    "CSV_ARCHIVE": "/lustre/storeB/users/roels/netatmo/csv",
+    "JSON_ARCHIVE": "/lustre/storeB/project/metproduction/products/netatmo/",
+    "OBSOUL_ARCHIVE": "/lustre/storeB/users/roels/netatmo/obsoul/"
+}

@@ -12,13 +12,13 @@ export @d_str
 
 const DIR = @__DIR__
 
-const archives = JSON.parsefile("$DIR/config/$(gethostname()).json")
-const CSV_ARCHIVE    = archives["CSV_ARCHIVE"]    # "/media/roels/_disk2/Netatmo"
-const JSON_ARCHIVE   = archives["JSON_ARCHIVE"]   # "/lustre/storeB/project/metproduction/products/netatmo/"
-const OBSOUL_ARCHIVE = archives["OBSOUL_ARCHIVE"] # "/media/roels/_disk2/OBSOUL/"
 
-function __init__()
-  isdir(CSV_ARCHIVE)  || error("Directory $CSV_ARCHIVE does not exist")
+
+function __init__()  
+  global archives = JSON.parsefile("$DIR/config/config.json")
+  global CSV_ARCHIVE    = archives["CSV_ARCHIVE"]    # "/media/roels/_disk2/Netatmo"
+  global JSON_ARCHIVE   = archives["JSON_ARCHIVE"]   # "/lustre/storeB/project/metproduction/products/netatmo/"
+  global OBSOUL_ARCHIVE = archives["OBSOUL_ARCHIVE"] # "/media/roels/_disk2/OBSOUL/"
   isdir(JSON_ARCHIVE) || error("Cannot access $JSON_ARCHIVE")
   @show CSV_ARCHIVE
   @show JSON_ARCHIVE

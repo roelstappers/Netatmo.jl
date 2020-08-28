@@ -6,12 +6,9 @@ CSV columns are
 """
 function json2csv(cday::Date)
 
-    YYYY = year(cday); 
-    mm   = lpad(month(cday), 2, "0"); 
-    DD   = lpad(day(cday), 2, "0")
-    
-    lustredir = "$JSON_ARCHIVE/$YYYY/$mm/$DD/"
-    outputdir = "$CSV_ARCHIVE/$YYYY/$mm/$DD/"
+    dirstr = Dates.format(cday,"yyyy/mm/dd/") 
+    lustredir = "$JSON_ARCHIVE/$dirstr"
+    outputdir = "$CSV_ARCHIVE/$dirstr"
 
     mkpath(outputdir)
     
@@ -26,7 +23,7 @@ end
 Convert jsonfile to csvfile and return dataframe
 """
 function json2csv(jsonfile::String,csvfile::String)
-    println("reading $jsonfile") 
+    @info "reading $jsonfile" 
    
     !isfile(csvfile) || error("outputfile $csvfile exists already") 
 
@@ -34,17 +31,23 @@ function json2csv(jsonfile::String,csvfile::String)
     jsonstring = replace(readline(jsonfile), "][" => ",")
       
     if isempty(jsonstring)  
-       println("Empty json. skipping $jsonfile")
+       @info "Empty json. skipping $jsonfile"
        return             
     end 
 
     if jsonstring == "[,,,,,,]" 
-        println("Empty json. skipping $jsonfile")
+        @info "Empty json. skipping $jsonfile"
         return
     end
 
-    jdict = JSON.parse(jsonstring) 
-    println("length jdict: $(length(jdict))")     
+    jdict = try   # Sometimes the JSON files are corrupted
+       JSON.parse(jsonstring) 
+    catch 
+        @info "Corrupted JSON file"
+        return
+    end
+
+    @info "length jdict: $(length(jdict))"     
    
     df = DataFrames.DataFrame(
         id          = String[], 

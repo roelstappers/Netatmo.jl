@@ -1,7 +1,7 @@
 name = "Netatmo"
 uuid = "cfff0a2a-884f-11e9-3fa8-b162b0da1b00"
 authors = ["Roel Stappers <roels@met.no>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"

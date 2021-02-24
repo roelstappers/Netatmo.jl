@@ -1,4 +1,4 @@
-function thin_togrid(df)
+function thin_togrid(df,distance)
 
     Rearth = Domains.Rearth
     groups= DataFrames.groupby(df,:id)
@@ -8,16 +8,16 @@ function thin_togrid(df)
     @info "Create balltree"
     kdtree = NearestNeighbors.BallTree(collect([lons lats]'),Distances.Haversine(Rearth),leafsize=10)
 
-    maxdist = 20000.
+    # maxdist = 20000.
     domain = Domains.Domain("METCOOP25C")
-    lonlat = Domains.getgridpoints(domain,gsize=maxdist)
+    lonlat = Domains.getgridpoints(domain,gsize=distance)
     out_df = DataFrames.DataFrame(id = String[], lat = Float64[], lon=Float64[], alt=Float64[], pressure = Float64[])
 
 
     @info "Loop over lon lat "
     ind, dist = knn(kdtree,collect([getindex.(lonlat,1) getindex.(lonlat,2)]'),1)
 
-    mask = getindex.(dist) .< maxdist/2   # only use Netatmo stations within maxdist of grid point
+    mask = getindex.(dist) .< distance/2.5   # only use Netatmo stations within maxdist/2 of grid point
     ok_indices = getindex.(ind,1)[mask]
 
     

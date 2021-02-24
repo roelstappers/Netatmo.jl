@@ -13,7 +13,7 @@ using Netatmo, Dates
 mslp2sp_coeff(alt) = 1.0 / (Int(round(100000 / (( 288 - 0.0065 * alt) / 288)^5.255)) / 100000)
 mkpath(Netatmo.OBSOUL_ARCHIVE)
 
-trange = Dates.DateTime(2019, 07, 08, 00):Dates.Hour(3):Dates.DateTime(2019, 07, 09, 00) 
+trange = Dates.DateTime(2019, 07,25, 00):Dates.Hour(3):Dates.DateTime(2019, 09, 01, 00) 
 for dtgmid in trange
     # dtgmid    = Dates.DateTime(2019,08,22,03)
     dtgbeg    = dtgmid - Dates.Minute(90)
@@ -24,8 +24,9 @@ for dtgmid in trange
     @info "Reading: $timerange"
     df = Netatmo.read(timerange, latrange = [50,80], lonrange = [0,50]) 
 
-    @info "Thinning to grid"
-    dfthinned = Netatmo.thin_togrid(df)
+    distance= 10000.0
+    @info "Thinning to grid distance=$distance"
+    dfthinned = Netatmo.thin_togrid(df,distance)
 
     @info "Thinning finished"
     stqualityflag      = 1111
@@ -59,7 +60,7 @@ for dtgmid in trange
     #  dt       = time   #unix2datetime(time_utc)    
         yyyymmdd = Dates.format(dtgmid, "yyyymmdd") 
         hmmss    = Dates.format(dtgmid, "HMMSS")      # No leading zero for HH
-        statid   = "'$(SubString(id,10,17))'" # 10:17 is a random choice
+        statid   = "'$(SubString(id,64,71))'" # Use last 8 characters for statid in OBSOUL 
         latid    = lpad(Int(round(10 * lat)), 3, "0")
         lonid    = lpad(Int(round(10 * lon)), 3, "0")
         # statid   = "'NA$latid$lonid'"
